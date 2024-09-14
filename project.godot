@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="test"
-run/main_scene="res://main.tscn"
+config/name="TinySwords"
+run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+transition_screen="*res://transition_screen.tscn"
 
 [input]
 
