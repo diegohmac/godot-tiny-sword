@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=4 uid="uid://b4p735fe271fr"]
+
+[ext_resource type="PackedScene" uid="uid://cc4ddys0d2lvx" path="res://characters/player.tscn" id="1_u8o45"]
+[ext_resource type="PackedScene" uid="uid://b7ufq7lqx62be" path="res://characters/enemy.tscn" id="2_mr366"]
+[ext_resource type="Texture2D" uid="uid://bqrkcig2rmbkw" path="res://assets/terrain/water/foam.png" id="2_uyfsk"]
+[ext_resource type="Texture2D" uid="uid://cqgox6r567gg4" path="res://assets/terrain/water/water.png" id="3_3wtc3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oc2em"]
+resource_name = "water"
+texture = ExtResource("3_3wtc3")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_xoarv"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 0
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/1 = SubResource("TileSetAtlasSource_oc2em")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tb2nq"]
+texture = ExtResource("2_uyfsk")
+texture_region_size = Vector2i(64, 64)
+0:0/size_in_atlas = Vector2i(3, 3)
+0:0/animation_frame_0/duration = 0.1
+0:0/animation_frame_1/duration = 0.1
+0:0/animation_frame_2/duration = 0.1
+0:0/animation_frame_3/duration = 0.1
+0:0/animation_frame_4/duration = 0.1
+0:0/animation_frame_5/duration = 0.1
+0:0/animation_frame_6/duration = 0.1
+0:0/animation_frame_7/duration = 0.1
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_4t1ej"]
+tile_size = Vector2i(64, 64)
+sources/1 = SubResource("TileSetAtlasSource_tb2nq")
+
+[node name="Main" type="Node2D"]
+
+[node name="TerrainManager" type="Node2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+
+[node name="Water" type="TileMapLayer" parent="TerrainManager"]
+tile_map_data = PackedByteArray("AAAKAAMAAQAAAAAAAAAJAAMAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAUAAQAAAAAAAAAJAAYAAQAAAAAAAAAJAAcAAQAAAAAAAAAJAAgAAQAAAAAAAAAIAAgAAQAAAAAAAAAHAAgAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_xoarv")
+
+[node name="Foam" type="TileMapLayer" parent="TerrainManager"]
+tile_set = SubResource("TileSet_4t1ej")
+
+[node name="Player" parent="." instance=ExtResource("1_u8o45")]
+position = Vector2(755, 384)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_mr366")]
+position = Vector2(214, 288)
